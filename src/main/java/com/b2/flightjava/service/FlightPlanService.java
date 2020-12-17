@@ -20,13 +20,6 @@ public class FlightPlanService {
         return  repo.findAll();
     }
 
-    public List<FlightPlan> listDate(String date) {
-        if (date != null) {
-            return repo.searchDate(date);
-        }
-        return  repo.findAll();
-    }
-
 
     public FlightPlan get(Long idflight_plan) {
         return repo.findById(idflight_plan).get();

@@ -23,13 +23,10 @@ public class FlightController {
     private FlightPlanService service;
 
     @GetMapping("/")
-    public String home(Model model, @Param("key") String key, @Param("date") String date) {
+    public String home(Model model, @Param("key") String key) {
         List<FlightPlan> flightPlansKey = service.listAll(key);
-        List<FlightPlan> flightPlansDate = service.listDate(date);
         model.addAttribute("listFlight", flightPlansKey);
-        model.addAttribute("listFlight", flightPlansDate);
         model.addAttribute("key", key);
-        model.addAttribute("date" ,date);
 
         return "indexx";
     }
