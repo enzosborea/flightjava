@@ -5,6 +5,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 
 @Entity
@@ -15,9 +17,10 @@ import java.io.Serializable;
 
 
 public class Flight implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idplane;
+    private Long idplane;
 
     @NotBlank
     private String name;
@@ -28,7 +31,12 @@ public class Flight implements Serializable {
     @NotBlank
     private String companie;
 
-    public Flight(Integer idplane, String name, Integer ref, String companie) {
+    @OneToOne(fetch = FetchType.LAZY,
+            cascade =  CascadeType.ALL,
+            mappedBy = "flight")
+    private FlightPlan flightPlan;
+
+    public Flight(Long idplane, String name, Integer ref, String companie) {
         this.idplane = idplane;
         this.name = name;
         this.ref = ref;
@@ -39,11 +47,11 @@ public class Flight implements Serializable {
 
     }
 
-    public Integer getId() {
+    public Long getId() {
         return idplane;
     }
 
-    public void setId(Integer idplane) {
+    public void setId(Long idplane) {
         this.idplane = idplane;
     }
 

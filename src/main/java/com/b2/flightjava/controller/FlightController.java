@@ -1,73 +1,49 @@
 package com.b2.flightjava.controller;
 
-import com.b2.flightjava.model.Flight;
-import com.b2.flightjava.repository.FlightRepository;
-import com.b2.flightjava.exception.ResourceNotFoundException;
+import com.b2.flightjava.model.FlightPlan;
+import com.b2.flightjava.repository.FlightPlanRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import javax.validation.Valid;
-import java.util.List;
-
-@RestController
+@Controller
 @RequestMapping("/api")
 public class FlightController {
     @Autowired
-    FlightRepository flightRepository;
+    FlightPlanRepository flightPlanRepository;
+
+
+    @GetMapping("/index")
+    public String listFlight(Model model) {
+        List<FlightPlan> flightPlans = flightPlanRepository.findAll();
+        model.addAttribute("listFlight", flightPlans);
+
+        return "indexx";
+    }
 
     // Get All Planes
     @GetMapping("/flights")
-    public List<Flight> getAllFlights() {
-        return flightRepository.findAll();
+    public List<FlightPlan> getAllFlights() {
+        return flightPlanRepository.findAll();
     }
 
     // Create a new plane
     @PostMapping("/flights")
-    public Flight createNote(@Valid @RequestBody Flight flight) {
-        return flightRepository.save(flight);
+    public FlightPlan createNote(@Valid @RequestBody FlightPlan flightPlan) {
+        return flightPlanRepository.save(flightPlan);
     }
 
     // Get a single plane
     @GetMapping("/flights/{id}")
-    public Flight getFlightById(@PathVariable(value = "id") Integer flightId) {
-        return flightRepository.findById(flightId)
-                .orElseThrow(() -> new ResourceNotFoundException("Flight", "id", flightId));
+    public Optional<FlightPlan> getFlightById(@PathVariable(value = "id") Long flightPlanId) {
+        return flightPlanRepository.findById(flightPlanId);
     }
 
-    // Update a plane
-    @PutMapping("/flights/{id}")
-    public Flight updateFlight(@PathVariable(value = "id") Integer flightId,
-                           @Valid @RequestBody Flight flightDetails) {
-
-        Flight flight = flightRepository.findById(flightId)
-                .orElseThrow(() -> new ResourceNotFoundException("Flight", "id", flightId));
-
-        flight.setName(flightDetails.getName());
-        flight.setRef(flightDetails.getRef());
-        flight.setCompanie(flightDetails.getCompanie());
-
-
-        Flight updatedFlight = flightRepository.save(flight);
-        return updatedFlight;
-    }
-
-    // Delete a plane
-    @DeleteMapping("/flights/{id}")
-    public ResponseEntity<?> deleteFlight(@PathVariable(value = "id") Integer flightId) {
-        Flight flight = flightRepository.findById(flightId)
-                .orElseThrow(() -> new ResourceNotFoundException("Flight", "id", flightId));
-
-        flightRepository.delete(flight);
-
-        return ResponseEntity.ok().build();
-    }
 
 
 }

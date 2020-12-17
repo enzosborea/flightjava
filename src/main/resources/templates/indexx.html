@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<tr>
+    <th>User ID</th>
+    <th>E-mail</th>
+    <th>First Name</th>
+    <th>Last Name</th>
+</tr>
+
+<tbody>
+<tr th:each="a: ${listFlight}">
+    <td th:text="${a.idflight_plan}">User ID</td>
+    <td th:text="${a.price}">User ID</td>
+    <td th:text="${a.start_date}">User ID</td>
+</tr>
+</tbody>
+
+</body>
+</html>
