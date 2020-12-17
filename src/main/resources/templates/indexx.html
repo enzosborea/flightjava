@@ -28,7 +28,7 @@
         <div class="card-body">
             <div class="container d-flex justify-content-around">
                 <form th:action="@{/}">
-                    Lieu de départ : <input type="text" name="key" id="key" size="50" th:value="${key}"/>
+                    Lieu de départ : <input type="text" name="key" placeholder="Ville,Companie..." id="key" size="50" th:value="${key}"/>
                     &nbsp;
                     <input type="submit" class="btn btn-primary" value="Rechercher" />
                     &nbsp;
@@ -36,7 +36,6 @@
             </div>
         </div>
     </div>
-
 <hr>
 
 
@@ -48,10 +47,11 @@
                 <h5 class="card-title" th:text="${a.start_city} + ' - ' + ${a.end_city}">...</h5>
                 <h6 class="card-subtitle mb-2 text-muted" th:text="${#dates.format(a.start_date, 'dd-MM-yyyy')} + ' - ' + ${#dates.format(a.end_date, 'dd-MM-yyyy')}">...</h6>
                 <h6 class="card-subtitle mb-2 text-muted" th:text="${#dates.format(a.start_date, 'HH:mm')} + ' - ' + ${#dates.format(a.end_date, 'HH:mm')}">...</h6>
+                <hr>
                 <p class="card-text" th:text="'Place : ' + ${a.person}">...</p>
                 <p class="card-text" th:text="'Prix : ' + ${a.price} + €">...</p>
                 <p class="card-text" th:text="'Appareil : ' + ${a.flight.name}">...</p>
-                <p class="card-text" th:text="'Ref : ' + ${a.flight.ref}">...</p>
+                <p class="card-text" th:text="'Référence : ' + ${a.flight.ref}">...</p>
                 <p class="card-text" th:text="'Companie : ' + ${a.flight.companie}">...</p>
                 <hr>
                 <div class="d-flex justify-content-end">
