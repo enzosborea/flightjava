@@ -37,7 +37,7 @@ public class FlightPlan implements Serializable {
     @JoinColumn(name = "plane_idplane", nullable = false)
     private Flight flight;
 
-    public FlightPlan(Long idflight_plan, Date start_date, Date end_date, String start_city, String end_city, Integer price, Integer person) {
+    public FlightPlan(Long idflight_plan, Date start_date, Date end_date, String start_city, String end_city, Integer price, Integer person, Flight flight) {
         this.idflight_plan = idflight_plan;
         this.start_date = start_date;
         this.end_date = end_date;
@@ -45,9 +45,18 @@ public class FlightPlan implements Serializable {
         this.end_city = end_city;
         this.price = price;
         this.person = person;
+        this.flight = flight;
     }
 
     public FlightPlan() {
+    }
+
+    public Flight getFlight() {
+        return flight;
+    }
+
+    public void setFlight(Flight flight) {
+        this.flight = flight;
     }
 
     public Long getIdflight_plan() {

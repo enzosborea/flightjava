@@ -12,17 +12,15 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/api")
+@RequestMapping("/")
 public class FlightController {
     @Autowired
     FlightPlanRepository flightPlanRepository;
-
 
     @GetMapping("/index")
     public String listFlight(Model model) {
         List<FlightPlan> flightPlans = flightPlanRepository.findAll();
         model.addAttribute("listFlight", flightPlans);
-
         return "indexx";
     }
 

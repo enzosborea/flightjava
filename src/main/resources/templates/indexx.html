@@ -57,31 +57,26 @@
         </div>
     </div>
 
-    <div>
-
-        <table border="1">
-            <tr>
-                <th>ID</th>
-                <th>Ville de départ</th>
-                <th>Heure de départ</th>
-                <th>Ville de d'arrivée</th>
-                <th>Heure d'arrivée</th>
-                <th>Place</th>
-                <th>Prix</th>
-            </tr>
-            <tbody>
-            <tr th:each="a: ${listFlight}">
-                <td th:text="${a.idflight_plan}"></td>
-                <td th:text="${a.start_city}"></td>
-                <td th:text="${a.start_date}"></td>
-                <td th:text="${a.end_city}"></td>
-                <td th:text="${a.end_date}"></td>
-                <td th:text="${a.person}"></td>
-                <td th:text="${a.price} + €"></td>
-            </tr>
-            </tbody>
-        </table>
+</div>
+<div class="d-flex flex-row justify-content-between">
+    <div th:each="a: ${listFlight}">
+        <div class="card m-2" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title" th:text="${a.start_city} + ' - ' + ${a.end_city}">...</h5>
+                <h6 class="card-subtitle mb-2 text-muted" th:text="${#dates.format(a.start_date, 'dd-MM-yyyy')} + ' - ' + ${#dates.format(a.end_date, 'dd-MM-yyyy')}">...</h6>
+                <h6 class="card-subtitle mb-2 text-muted" th:text="${#dates.format(a.start_date, 'HH:mm')} + ' - ' + ${#dates.format(a.end_date, 'HH:mm')}">...</h6>
+                <p class="card-text" th:text="'Place : ' + ${a.person}">...</p>
+                <p class="card-text" th:text="'Prix : ' + ${a.price} + €">...</p>
+                <p class="card-text" th:text="'Appareil : ' + ${a.flight.name}">...</p>
+                <p class="card-text" th:text="'Ref : ' + ${a.flight.ref}">...</p>
+                <p class="card-text" th:text="'Companie : ' + ${a.flight.companie}">...</p>
+                <a href="#" class="card-link">Card link</a>
+                <a href="#" class="card-link">Another link</a>
+            </div>
+        </div>
     </div>
+</div>
+</div>
 
     <!--    <div class="d-flex flex-row justify-content-between" th:each ="etudiant : ${#lists}">-->
     <!--      <div class="card m-2" style="width: 18rem;">-->
