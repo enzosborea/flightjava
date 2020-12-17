@@ -3,7 +3,9 @@ package com.b2.flightjava.controller;
 import com.b2.flightjava.model.FlightPlan;
 import com.b2.flightjava.repository.FlightPlanRepository;
 
+import com.b2.flightjava.service.FlightPlanService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,18 +19,21 @@ public class FlightController {
     @Autowired
     FlightPlanRepository flightPlanRepository;
 
-    @GetMapping("/index")
-    public String listFlight(Model model) {
-        List<FlightPlan> flightPlans = flightPlanRepository.findAll();
-        model.addAttribute("listFlight", flightPlans);
+    @Autowired
+    private FlightPlanService service;
+
+    @GetMapping("/")
+    public String home(Model model, @Param("key") String key, @Param("date") String date) {
+        List<FlightPlan> flightPlansKey = service.listAll(key);
+        List<FlightPlan> flightPlansDate = service.listDate(date);
+        model.addAttribute("listFlight", flightPlansKey);
+        model.addAttribute("listFlight", flightPlansDate);
+        model.addAttribute("key", key);
+        model.addAttribute("date" ,date);
+
         return "indexx";
     }
 
-    // Get All Planes
-    @GetMapping("/flights")
-    public List<FlightPlan> getAllFlights() {
-        return flightPlanRepository.findAll();
-    }
 
     // Create a new plane
     @PostMapping("/flights")
@@ -37,11 +42,8 @@ public class FlightController {
     }
 
     // Get a single plane
-    @GetMapping("/flights/{id}")
+    @GetMapping("/{id}")
     public Optional<FlightPlan> getFlightById(@PathVariable(value = "id") Long flightPlanId) {
         return flightPlanRepository.findById(flightPlanId);
     }
-
-
-
 }

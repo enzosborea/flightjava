@@ -8,7 +8,7 @@ import javax.persistence.Table;
 import javax.persistence.JoinColumn;
 import java.util.Date;
 
-@Entity
+@Entity(name = "flight_plan")
 @Table(name = "flight_plan")
 public class FlightPlan implements Serializable {
     @Id
