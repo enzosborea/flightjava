@@ -9,34 +9,46 @@ import javax.persistence.JoinColumn;
 import java.util.Date;
 
 @Entity(name = "flight_plan")
+
+// nom de la table en bdd
 @Table(name = "flight_plan")
 public class FlightPlan implements Serializable {
+
+    // champs bdd
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idflight_plan;
 
+    // champs bdd
     @NotBlank
     private Date start_date;
 
+    // champs bdd
     @NotBlank
     private Date end_date;
 
+    // champs bdd
     @NotBlank
     private String start_city;
 
+    // champs bdd
     @NotBlank
     private String end_city;
 
+    // champs bdd
     @NotBlank
     private int price;
 
+    // champs bdd
     @NotBlank
     private int person;
 
+    // relation bdd OneToOne
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "plane_idplane", nullable = false)
     private Flight flight;
 
+    //Constructeur
     public FlightPlan(Long idflight_plan, Date start_date, Date end_date, String start_city, String end_city, Integer price, Integer person, Flight flight) {
         this.idflight_plan = idflight_plan;
         this.start_date = start_date;
@@ -48,8 +60,11 @@ public class FlightPlan implements Serializable {
         this.flight = flight;
     }
 
+    //Constructeur
     public FlightPlan() {
     }
+
+    //Get et Set
 
     public Flight getFlight() {
         return flight;

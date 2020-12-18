@@ -13,13 +13,13 @@ public class FlightPlanService {
     @Autowired
     private FlightPlanRepository repo;
 
+    // relation 'key' form html
     public List<FlightPlan> listAll(String key) {
         if (key != null) {
             return repo.search(key);
         }
         return  repo.findAll();
     }
-
 
     public FlightPlan get(Long idflight_plan) {
         return repo.findById(idflight_plan).get();

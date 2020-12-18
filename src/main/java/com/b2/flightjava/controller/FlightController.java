@@ -9,9 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/")
@@ -22,6 +20,7 @@ public class FlightController {
     @Autowired
     private FlightPlanService service;
 
+    // retourne la page indexx.html
     @GetMapping("/")
     public String home(Model model, @Param("key") String key) {
         List<FlightPlan> flightPlansKey = service.listAll(key);
@@ -31,6 +30,7 @@ public class FlightController {
         return "indexx";
     }
 
+    /* Non utilisé en @Controller
 
     // Create a new plane
     @PostMapping("/flights")
@@ -43,4 +43,5 @@ public class FlightController {
     public Optional<FlightPlan> getFlightById(@PathVariable(value = "id") Long flightPlanId) {
         return flightPlanRepository.findById(flightPlanId);
     }
+    */
 }

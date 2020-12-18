@@ -9,6 +9,7 @@ import java.util.List;
 
 @Repository
 public interface FlightPlanRepository extends JpaRepository<FlightPlan, Long> {
+    // Requête sql
     @Query("SELECT f FROM flight_plan f WHERE CONCAT(f.start_city, ' ', f.end_city, ' ', f.flight.companie) LIKE %?1%")
     public List<FlightPlan> search(String key);
 

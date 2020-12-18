@@ -10,6 +10,8 @@ import javax.persistence.Table;
 
 
 @Entity
+
+// nom de la table en bdd
 @Table(name = "plane")
 @EntityListeners(AuditingEntityListener.class)
 @JsonIgnoreProperties(value = {"createdAt", "updatedAt"},
@@ -18,24 +20,30 @@ import javax.persistence.Table;
 
 public class Flight implements Serializable {
 
+    // champs bdd
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idplane;
 
+    // champs bdd
     @NotBlank
     private String name;
 
+    // champs bdd
     @NotBlank
     private int ref;
 
+    // champs bdd
     @NotBlank
     private String companie;
 
+    // relation bdd OneToOne
     @OneToOne(fetch = FetchType.LAZY,
             cascade =  CascadeType.ALL,
             mappedBy = "flight")
     private FlightPlan flightPlan;
 
+    //Constructeur
     public Flight(Long idplane, String name, Integer ref, String companie) {
         this.idplane = idplane;
         this.name = name;
@@ -43,9 +51,12 @@ public class Flight implements Serializable {
         this.companie = companie;
     }
 
+    //Constructeur
     public Flight() {
 
     }
+
+    //Get et Set
 
     public Long getId() {
         return idplane;
